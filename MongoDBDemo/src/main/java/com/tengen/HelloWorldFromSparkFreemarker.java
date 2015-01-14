@@ -13,8 +13,6 @@ import spark.Spark;
 
 import java.io.StringWriter;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by vaibhav on 07-01-2015.
@@ -28,14 +26,14 @@ public class HelloWorldFromSparkFreemarker {
         MongoClient client =
                 new MongoClient("localhost", 27017);
 
-        DB database = client.getDB("course");
-        final DBCollection collection = database.getCollection("course");
+        DB database = client.getDB("m101");
+        final DBCollection collection = database.getCollection("funnynumbers");
         Route route = new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 StringWriter writer = new StringWriter();
                 try {
-                    Template helloTemplate = configuration.getTemplate("hello.ftl");
+                    Template helloTemplate = configuration.getTemplate("hello.html");
 
                     DBObject object = collection.findOne();
 
@@ -44,7 +42,7 @@ public class HelloWorldFromSparkFreemarker {
 
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+            }
                 return writer;
             }
 
